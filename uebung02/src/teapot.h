@@ -19,6 +19,8 @@
 #include "trifill.h"
 #include "gouraudshading.h"
 #include <vector>
+#include <iostream>
+
 void SetPoint(int x, int y, float i);
 
 #endif

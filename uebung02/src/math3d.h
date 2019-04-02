@@ -48,6 +48,10 @@ typedef struct {
  ******************************************************************/
 
 
+void scaleVector(Vector* v, double scaling);
+
+void addVector(Vector* resulting, Vector* v1, Vector* v2 );
+
 /*
  * Füllt einen Vektor mit Werten
  */

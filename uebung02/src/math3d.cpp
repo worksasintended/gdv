@@ -13,9 +13,24 @@
  * allgemeine Vektor- und Matrizenfunktionen 
  ******************************************************************/
 
+
+void scaleVector(Vector* v, double scaling){
+  v->x *= scaling;
+  v->y *= scaling;
+  v->z *= scaling;
+  v->w *= abs(scaling);
+}
+
+void addVector(Vector* resulting, Vector* v1, Vector* v2 ){
+    resulting->x = v1->x + v2->x;
+    resulting->y = v1->y + v2->y;
+    resulting->z = v1->z + v2->z;
+    resulting->w = sqrt( pow(resulting->x,2) + pow(resulting->y,2) + pow(resulting->z,2));
+}
+
 /*
  * Füllt einen Vektor mit Werten
- */
+: */
 
 void SetVector(Vector * v, double f11, double f12, double f13, double f14)
 {

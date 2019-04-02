@@ -17,18 +17,35 @@
 
 float Intensitaet(ObjectPoint P, Vector N)
 {
-    double I_ambient, I_diffuse, CosNL;
-    Vector LightDir;
+    double I_ambient, I_diffuse, CosNL, I_specular, CosNV;
+    Vector LightDir, ReflectLightDir, ViewDir;
     
     ObjectPoint LightSource = GetLight();       
     
     MakeVector (P, LightSource, &LightDir);
     Normalize (&LightDir);
     CosNL = SkalProd (N, LightDir);
+
+
+    //specular reflection
+    ObjectPoint ViewPoint = GetEye();
+    MakeVector(P, ViewPoint, &ViewDir);
+
+    ReflectLightDir = N;
+    scaleVector(&ReflectLightDir, 2*CosNL);
+    addVector(&ReflectLightDir, &ReflectLightDir, &LightDir); 
+    Normalize(&ReflectLightDir);
+    Normalize(&ViewDir);
+    CosNV = SkalProd(ReflectLightDir, ViewDir);
+
+
     if (CosNL < 0)  CosNL = 0;
+    if (CosNV < 0)  CosNV = 0;
     I_ambient = 0.1;
-    I_diffuse = 0.9 * CosNL;
-    return  (float) (I_ambient + I_diffuse);
+    I_diffuse = 0.6 * CosNL;
+    std::cout << CosNV << std::endl;
+    I_specular = .3 *  CosNV;
+    return  (float) (I_ambient + I_diffuse + I_specular);
 }
 
 

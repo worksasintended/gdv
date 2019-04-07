@@ -43,8 +43,8 @@ float Intensitaet(ObjectPoint P, Vector N)
     if (CosNV < 0)  CosNV = 0;
     I_ambient = 0.1;
     I_diffuse = 0.6 * CosNL;
-    std::cout << CosNV << std::endl;
-    I_specular = .3 *  CosNV;
+    I_specular = .3 *  pow(CosNV,4) ;
+    //return  (float) (1./0.3*I_specular);
     return  (float) (I_ambient + I_diffuse + I_specular);
 }
 
